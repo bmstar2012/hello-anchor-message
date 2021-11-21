@@ -1,5 +1,5 @@
 [programs.localnet]
-hello_anchor_message = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+hello_anchor_message = "5e35KP8GwepMbm7JwHcAxxiGBrZQmJ5qKgaago35UCFk"
 
 [registry]
 url = "https://anchor.projectserum.com"
