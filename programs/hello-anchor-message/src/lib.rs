@@ -6,21 +6,19 @@ declare_id!("5e35KP8GwepMbm7JwHcAxxiGBrZQmJ5qKgaago35UCFk");
 pub mod hello_anchor_message {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> ProgramResult {
+    pub fn initialize(ctx: Context<Initialize>, data: String) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
-        base_account.count = 0;
-        // let copy = data.clone();
-        // base_account.data = data;
-        // base_account.data_list.push(copy);
+        let copy = data.clone();
+        base_account.data = data;
+        base_account.data_list.push(copy);
         Ok(())
     }
 
-    pub fn update(ctx: Context<Update>) -> ProgramResult {
+    pub fn update(ctx: Context<Update>, data: String) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
-        base_account.count += 1;
-        // let copy = data.clone();
-        // base_account.data = data;
-        // base_account.data_list.push(copy);
+        let copy = data.clone();
+        base_account.data = data;
+        base_account.data_list.push(copy);
         Ok(())
     }
 }
@@ -42,7 +40,6 @@ pub struct Update<'info> {
 
 #[account]
 pub struct BaseAccount {
-    // pub data: String,
-    // pub data_list: Vec<String>,
-    pub count: u64,
+    pub data: String,
+    pub data_list: Vec<String>,
 }

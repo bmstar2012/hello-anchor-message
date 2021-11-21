@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import { Program, Provider, web3 } from '@project-serum/anchor';
 import idl from './idl.json';
 
@@ -16,6 +16,9 @@ const baseAccount = Keypair.generate();
 const opts = {
   preflightCommitment: "processed"
 }
+  // const network = "http://127.0.0.1:8899";
+  const network = clusterApiUrl('devnet');
+  
 const programID = new PublicKey(idl.metadata.address);
 
 function App() {
@@ -27,7 +30,7 @@ function App() {
   async function getProvider() {
     /* create the provider and return it to the caller */
     /* network set to local network for now */
-    const network = "http://127.0.0.1:8899";
+
     const connection = new Connection(network, opts.preflightCommitment);
 
     const provider = new Provider(
@@ -36,16 +39,13 @@ function App() {
     return provider;
   }
 
-  async function initialize() {
+  async function initialize() {    
     const provider = await getProvider();
     /* create the program interface combining the idl, program ID, and provider */
     const program = new Program(idl, programID, provider);
-    console.log('initialize', baseAccount.publicKey.toString());
-    console.log('provider.wallet', provider.wallet.publicKey.toString());
-    console.log('proramId', programID.toString());
     try {
       /* interact with the program via rpc */
-      await program.rpc.initialize({
+      await program.rpc.initialize("Hello World", {
         accounts: {
           baseAccount: baseAccount.publicKey,
           user: provider.wallet.publicKey,
@@ -56,8 +56,8 @@ function App() {
 
       const account = await program.account.baseAccount.fetch(baseAccount.publicKey);
       console.log('account: ', account);
-      // setValue(account.data.toString());
-      // setDataList(account.dataList);
+      setValue(account.data.toString());
+      setDataList(account.dataList);
     } catch (err) {
       console.log("Transaction error: ", err);
     }
@@ -119,7 +119,7 @@ function App() {
 }
 
 const AppWithProvider = () => (
-  <ConnectionProvider endpoint="http://127.0.0.1:8899">
+  <ConnectionProvider endpoint={network}>
     <WalletProvider wallets={wallets} autoConnect>
       <WalletModalProvider>
         <App />
