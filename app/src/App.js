@@ -16,8 +16,8 @@ const baseAccount = Keypair.generate();
 const opts = {
   preflightCommitment: "processed"
 }
-  // const network = "http://127.0.0.1:8899";
-  const network = clusterApiUrl('devnet');
+  const network = "http://127.0.0.1:8899";
+  // const network = clusterApiUrl('devnet');
   
 const programID = new PublicKey(idl.metadata.address);
 
@@ -44,6 +44,9 @@ function App() {
     /* create the program interface combining the idl, program ID, and provider */
     const program = new Program(idl, programID, provider);
     try {
+      console.log("baseAccount:", baseAccount.publicKey.toString(),
+        "user:", provider.wallet.publicKey.toString(),
+        "systemProgram:", SystemProgram.programId.toString());
       /* interact with the program via rpc */
       await program.rpc.initialize("Hello World", {
         accounts: {

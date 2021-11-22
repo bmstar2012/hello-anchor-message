@@ -1,16 +1,16 @@
 [programs.localnet]
-hello_anchor_message = "5e35KP8GwepMbm7JwHcAxxiGBrZQmJ5qKgaago35UCFk"
+hello_anchor_message = "4Avv9uQe4j3KxoMaHzCHEhiNnyaio56AkAcucCDN5d3G"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
-# [provider]
-# cluster = "localnet"
-# wallet = "/home/bmstar/.config/solana/id.json"
-
 [provider]
-cluster = "devnet"
-wallet = "/home/bmstar/work/keys/my-keypair.json"
+cluster = "localnet"
+wallet = "/home/bmstar/.config/solana/id.json"
+
+# [provider]
+# cluster = "devnet"
+# wallet = "/home/bmstar/work/keys/my-keypair.json"
 
 
 [scripts]
