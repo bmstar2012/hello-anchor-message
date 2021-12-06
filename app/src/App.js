@@ -16,8 +16,8 @@ const baseAccount = Keypair.generate();
 const opts = {
   preflightCommitment: "processed"
 }
-  const network = "http://127.0.0.1:8899";
-  // const network = clusterApiUrl('devnet');
+  // const network = "http://127.0.0.1:8899";
+  const network = clusterApiUrl('devnet');
   
 const programID = new PublicKey(idl.metadata.address);
 
